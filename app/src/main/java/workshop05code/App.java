@@ -10,6 +10,8 @@ import java.io.FileInputStream;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -72,15 +74,21 @@ public class App {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Enter a 4 letter word for a guess or q to quit: ");
             String guess = scanner.nextLine();
-
             while (!guess.equals("q")) {
+                if (guess.matches("^[a-zA-Z]{4}$")) {
+
+                
                 System.out.println("You've guessed '" + guess+"'.");
+                
 
                 if (wordleDatabaseConnection.isValidWord(guess)) { 
                     System.out.println("Success! It is in the the list.\n");
                 }else{
                     System.out.println("Sorry. This word is NOT in the the list.\n");
                 }
+            } else {
+                System.out.println("The word '" + guess + "' is not a valid word.\n");
+            }
 
                 System.out.print("Enter a 4 letter word for a guess or q to quit: " );
                 guess = scanner.nextLine();
